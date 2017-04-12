@@ -7,18 +7,15 @@ var command = process.argv[2];
 
 if (command === 'my-tweets'){
 
-// 	//*****LINK TO KEYS.JS****
-// 	// var client = new Twitter({
-// 	//   consumer_key: '',
-// 	//   consumer_secret: '',
-// 	//   access_token_key: '',
-// 	//   access_token_secret: ''
-// 	// });
+var twitKeys = require("./keys.js");
+var client = new twitter (twitKeys.twitterKeys);
 	 
-	var params = {screen_name: 'nodejs'};
-	client.get('statuses/user_timeline', params, function(error, tweets, response) {
+	client.get('statuses/user_timeline', 20, function(error, tweets, response) {
 	  if (!error) {
-	    console.log(tweets);
+	    for (var i = 0; i < tweets.length; i++) {
+	     console.log(tweets[i].created_at);
+	     console.log(tweets[i].text);
+	    };
 	  }
 	});
 }
@@ -27,7 +24,7 @@ else if (command === 'spotify-this-song') {
 
 }
 
-if (command === 'movie-this') {
+else if (command === 'movie-this') {
 	var movieTitle = process.argv.slice(3).join('+');
 
 	request("http://www.omdbapi.com/?t=" + movieTitle + "&y=&plot=short&tomatoes=true&r=json", function(error, response, body) {
