@@ -27,7 +27,7 @@ function myTweets(){
 function spotifyThis(){
 	spotify.search({ type: 'track', query: song }, function(err, data) {
 	    if (!err) {
-	    	var songInfo = data.tracks.items[0];
+	    	var songInfo = data.tracks.items[3];
 
 	    	console.log("Artist: " + songInfo.artists[0].name);
 	    	console.log("Song Title: " + songInfo.name);
